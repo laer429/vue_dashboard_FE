@@ -1,99 +1,3 @@
-<!-- 
-<template>
-    <table class="type09"> 
-    <thead>
-    <tr>
-      <th scope="cols"></th>
-      <th scope="cols"></th>
-    </tr>
-    </thead>
-    <tbody>
-        <tr>
-      <th scope="row">제목</th>
-      <td><input type="text"></td>
-    </tr>
-    <tr>
-      <th scope="row">작성자</th>
-      <td><input type="text"></td>
-    </tr>
-    </tbody>
-    <tr>
-        <th colspan="2">
-            <textarea cols="2" rows="10" id="contents" placeholder="내용을입력하세요."></textarea>
-        </th>
-    </tr>
-  </table>
-  <button type="submit">등록</button>
-
-  
-  </template>
-  
-  <style>
-  input {
-  width: 500px;
-  height: 32px;
-  font-size: 15px;
-  border: 0;
-  outline: none;
-  padding-left: 10px;
-  }
-
-  #contents {
-  width: 665px;
-  height: 500px;
-  font-size: 15px;
-  border: 0;
-  outline: none;
-  padding-left: 10px;
-  }
-
-  table.type09 {
-    border-collapse: collapse;
-    text-align: left;
-    line-height: 1.5;
-  
-  }
-  table.type09 thead th {
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: top;
-    color: #369;
-    border-bottom: 3px solid #036;
-  }
-  table.type09 tbody th {
-    width: 150px;
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: top;
-    border-bottom: 1px solid #ccc;
-    background: #f3f6f7;
-  }
-  table.type09 td {
-    width: 350px;
-    padding: 10px;
-    vertical-align: top;
-    border-bottom: 1px solid #ccc;
-  }
-  button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  margin: 0;
-  padding: 0.5rem 1rem;
-  color:#036;
-  font-family: "Noto Sans KR", sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  text-align: center;
-  text-decoration: none;
-
-  display: inline-block;
-  width: auto;
-
-  border: none;
-  border-radius: 4px;
-}
-  </style> -->
   <template>
     <section class="notice">
       <div class="page-title">
@@ -130,7 +34,7 @@
   </template>
   
   <script>
-  import { RouterLink, RouterView } from 'vue-router'
+
     export default{
       data() {
         return {

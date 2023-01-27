@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import AboutView from '../views/AboutView.vue'
-import BoardView from '../views/BoardView.vue'
+import DashBoard1 from '../views/DashBoard1.vue'
+import DashBoard2 from '../views/DashBoard2.vue'
+import DashBoard3 from '../views/DashBoard3.vue'
 import CreateView from '../views/pages/CreateView.vue'
 import ContentRouter from '../views/pages/ContentRouter.vue'
 
@@ -10,8 +10,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView,
+      name: 'dashboard1',
+      component: DashBoard1,
       children: [
         {
           path: 'contentRoute',
@@ -21,14 +21,14 @@ const router = createRouter({
       ]
     },
     {
-      path: '/about',
-      name: 'about',
-      component: AboutView
+      path: '/dashboard2',
+      name: 'dashboard2',
+      component: DashBoard2
     },
     {
-      path: '/board',
-      name: 'board',
-      component: BoardView
+      path: '/dashboard3',
+      name: 'dashboard3',
+      component: DashBoard3
     },
     {
       path: '/create',
