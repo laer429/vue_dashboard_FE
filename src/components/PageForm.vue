@@ -1,12 +1,12 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
     <section class="notice">
       <div class="page-title">
             <div class="container">
-                <h3>{{ boardnum }}</h3>
+                <h3>게시판{{ boardnum }}</h3>
             </div>
         </div>
   
@@ -26,17 +26,19 @@ import { RouterLink, RouterView } from 'vue-router'
                     <tr v-for="(l,index) in datas" :key="index">
                         <td>{{ index+1 }}</td>
                         <th>
-                          <RouterLink to="contentroute">{{ datas[index].title }}</RouterLink>
+                          <!-- 컴포넌트 속 컴포넌트 -->
+                          <!-- <RouterLink to="contentroute">{{ datas[index].title }}</RouterLink> -->
+                          <!-- <RouterView></RouterView> -->
                           <!-- @click.native"클릭이벤트" -->
-                          <RouterView></RouterView>
+                          <RouterLink :to="{ name: 'contentpages', params: { content_id: datas[index].id }}">{{ datas[index].title }}</RouterLink>
                           <p>테스트</p>
                         </th>
                         <td>{{ datas[index].writer }}</td>
-                        <td>{{ datas[index].date }}</td>
+                        <td>{{ datas[index].create_at }}</td>
                     </tr>
                     </tbody>
                 </table>
-                <div class="create"><RouterLink to="/create">글쓰기</RouterLink></div>
+                <div class="create"><RouterLink :to="{ name: 'create', params: {page_id: boardnum}}">글쓰기</RouterLink></div>
             </div>
         </div>
     
@@ -47,26 +49,6 @@ import { RouterLink, RouterView } from 'vue-router'
 
 
     export default {
-        // data() {
-        //     return {
-        //         datas:[
-        //             {
-        //                 writer:"writer",
-        //                 title:'title',
-        //                 date:'date',
-                    
-        //             },
-        //             {
-        //                 writer:"writer2",
-        //                 title:'title2',
-        //                 date:'date2',
-                    
-        //             },
-                    
-        //         ],
-        //         boardnum:"게시판n"
-        //     }
-        // }
         props:['datas','boardnum']
     }
 </script>

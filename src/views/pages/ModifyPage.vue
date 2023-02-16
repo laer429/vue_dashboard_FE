@@ -1,4 +1,5 @@
-  <template>
+
+<template>
     <section class="notice">
       <div class="page-title">
             <div class="container">
@@ -36,10 +37,11 @@
     export default{
       data() {
         return {
-          page_id: this.$route.params.page_id,
-          title:'',
-          writer:'',
-          content:''
+          page_id: this.$route.query.page_id,
+          title:this.$route.query.title,
+          writer:this.$route.query.writer,
+          content:this.$route.query.content,
+          id:this.$route.params.id
         }
       },
       methods: {
@@ -52,10 +54,11 @@
             title:this.title,
             content:this.content,
             writer:this.writer,
-            page_id:this.page_id
+            page_id:this.page_id,
+            id:this.id
           }
           console.log('백가기전')
-          this.$axios.post(apiUrl, this.form).then(() => {
+          this.$axios.put(apiUrl, this.form).then(() => {
             console.log('백갔다옴')
             alert('글이 저장되었습니다.')
             this.fnList()
@@ -67,8 +70,8 @@
           });
 
 
-        }
-      }
+        },
+      },
     }
   </script>
     

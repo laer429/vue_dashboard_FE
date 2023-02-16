@@ -3,7 +3,8 @@ import DashBoard1 from '../views/DashBoard1.vue'
 import DashBoard2 from '../views/DashBoard2.vue'
 import DashBoard3 from '../views/DashBoard3.vue'
 import CreateView from '../views/pages/CreateView.vue'
-import ContentRouter from '../views/pages/ContentRouter.vue'
+import ContentPage from '../views/pages/ContentPage.vue'
+import ModifyPage from '../views/pages/ModifyPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,13 +13,14 @@ const router = createRouter({
       path: '/',
       name: 'dashboard1',
       component: DashBoard1,
-      children: [
-        {
-          path: 'contentRoute',
-          name: 'contentRoute',
-          component: ContentRouter
-        }
-      ]
+      // 컴포넌트 속 컴포넌트
+      // children: [
+      //   {
+      //     path: 'contentpage',
+      //     name: 'contentpage',
+      //     component: ContentPages
+      //   }
+      // ]
     },
     {
       path: '/dashboard2',
@@ -31,12 +33,20 @@ const router = createRouter({
       component: DashBoard3
     },
     {
-      path: '/create',
+      path: '/create/:page_id',
       name: 'create',
       component: CreateView
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      
+    },
+    {
+      path: '/:content_id',
+      name: 'contentpages',
+      component: ContentPage
+    },
+    {
+      path: '/ModifyPage/:id',
+      name: 'ModifyPage',
+      component: ModifyPage
     }
   ]
 })

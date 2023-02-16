@@ -1,30 +1,34 @@
-  <template>
+<template>
     <section class="notice">
       <div class="page-title">
             <div class="container">
-                <h3>글쓰기</h3>
+                <h3></h3>
             </div>
         </div>
   
       <!-- board list area -->
         <div id="board-list">
             <div class="container">
-                <div class="create"><input id="submitbtn" type="button" v-on:click="fnWrite" value="등록"></div>
+                <form>
+                    <!-- 버튼 태그는 폼 형식 안에 있으므로 누를 시 자동으로 새로고침 된다. 이를 해결하기 위해 type="button" 추가 -->
+                    <button id="content_modify" type="button" v-on:click="fnDelete()">삭제</button><button id="content_modify" v-on:click="fnMove()">수정</button>
+                
                 <table class="board-table_write">
                     <thead>
                     <tr>
                         <th scope="col" class="th-num" >작성자</th>
-                        <th scope="col" class="th-title_write" id="title"><input type="text" v-model="writer" placeholder="작성자를 입력하세요." required></th>
+                        <th scope="col" class="th-titles" id="title">{{ contentdatas.writer }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td scope="col" class="th-num" >제목</td>
-                        <th scope="col" class="th-title_write" id="title"><input type="text" v-model="title" placeholder="제목을 입력하세요." required></th>  
+                        <th scope="col" class="th-titles" id="title">{{ contentdatas.title }}</th>  
                     </tr>
                     </tbody>
                 </table>
-                <textarea id="textarea" v-model="content" placeholder="내용을 입력하세요." required></textarea>
+                <div id="content_area" >{{ contentdatas.content }}</div>
+                </form>
             </div>
         </div>
     
@@ -36,44 +40,48 @@
     export default{
       data() {
         return {
-          page_id: this.$route.params.page_id,
-          title:'',
-          writer:'',
-          content:''
+            contentdatas:{},
+            id: this.$route.params.content_id
         }
       },
       methods: {
-        fnList(){
-          this.$router.push({name:('dashboard' + this.page_id)})
-        },
-        fnWrite() {
-          let apiUrl = this.$serverUrl + 'create'
-          this.form = {
-            title:this.title,
-            content:this.content,
-            writer:this.writer,
-            page_id:this.page_id
+      fnGetList() {
+          //get(주소): 백엔드 app.get(/contentpage:id)이므로 'contentpage/'를 추가해줌
+        this.$axios.get(this.$serverUrl + this.id ).then((res) => {
+          this.contentdatas = res.data[0];
+          console.log('data:',res.data);
+          console.log('id',this.contentdatas.page_id);
+        }).catch((err) => {
+          if (err.message.indexOf('Network Error') >-1) {
+            alert('네트워크 오류')
           }
-          console.log('백가기전')
-          this.$axios.post(apiUrl, this.form).then(() => {
-            console.log('백갔다옴')
-            alert('글이 저장되었습니다.')
-            this.fnList()
+        })
+      },
+      fnMove() {
+          this.$router.push({ name: 'ModifyPage', params: {id: this.contentdatas.id},query: {page_id:this.contentdatas.page_id, writer: this.contentdatas.writer, title: this.contentdatas.title, content: this.contentdatas.content} })
+        },
+      fnDelete() {
+        console.log('백가기전')
+        this.$axios.delete(this.$serverUrl + this.id)
+          .then((res) => {
+            console.log('delete:',this.id);
+            console.log('res:',res);
+            this.$router.push({name:('dashboard' + this.contentdatas.page_id)})
           }).catch((err) => {
-            console.log('err', err);
-            // if (err.message.indexOf('Network Error') > -1) {
-            //   alert('네트워크가 원활하지 않습니다.\n잠시 후 다시 시도해주세요.')
-            // }
-          });
-
-
-        }
+            if (err) {
+              console.log('err',err);
+            }
+          })
       }
+      },
+    mounted() {
+      this.fnGetList()
+    }
     }
   </script>
     
     <style>
-    #textarea {
+    #content_area {
     width: 100%;
     height: 500px;
     font-size: 15px;
@@ -137,10 +145,11 @@
       text-align: center;
     }
     
-    .board-table_write .th-title_write {
+    .board-table_write .th-titles {
       width: 600px;
       text-align: left;
       padding-left: 50px;
+      height: 45px;
       /* border-left: 1px solid #ccc; */
       border-top: 1px solid #ccc;
     }
@@ -245,10 +254,10 @@
       width: 1px;
       height: 1px;
     }
-    #create {
+    #content_modify {
       font-size: 14px;
       font-weight: bold;
-      width: 100%;
+      width: 50px;
       color: #333;
       display: inline-block;
       line-height: 1.4;
@@ -257,23 +266,21 @@
       padding-top: 10px;
       padding-right: 83px;
       text-align: right;
+      border: none;
+      float: right;
+      background-color: white;
+      cursor: pointer;
+      padding-right: 10px;
+      padding-bottom: 10px;
     
     }
     
-    #submitbtn:hover {
+    #content_modify:hover {
       text-decoration: underline;
     }
     #contentview {
       display: none;
     }
-    #submitbtn {
-      width: 50px;
-      border: none;
-      background-color: white;
-      font-weight: bold;
-      cursor: pointer;
-      padding-right: 5px;
-      padding-bottom: 10px;
-    }
+    
     
     </style>
