@@ -6,7 +6,7 @@ import { RouterLink } from 'vue-router'
     <section class="notice">
       <div class="page-title">
             <div class="container">
-                <h3>게시판{{ boardnum }}</h3>
+                <h3>{{ dashboardtype }}</h3>
             </div>
         </div>
   
@@ -49,6 +49,6 @@ import { RouterLink } from 'vue-router'
 
 
     export default {
-        props:['datas','boardnum']
+        props:['datas','boardnum','dashboardtype']
     }
 </script>

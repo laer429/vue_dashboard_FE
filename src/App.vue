@@ -4,16 +4,14 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
-    <div class="wrapper">
+    <div class="wrapper" id="board">
       <nav>
-        <RouterLink to="/">게시판1</RouterLink>
-        <RouterLink to="/dashboard2">게시판2</RouterLink>
-        <RouterLink to="/dashboard3">게시판3</RouterLink>
+        <RouterLink to="/">축구 게시판</RouterLink>
+        <RouterLink to="/dashboard2">야구 게시판</RouterLink>
+        <RouterLink to="/dashboard3">농구 게시판</RouterLink>
       </nav>
     </div>
   </header>
-  <div></div>
-  <div></div>
   <div>
     <RouterView></RouterView>
   </div>
@@ -31,6 +29,7 @@ nav {
   font-size: 24px;
   text-align: center;
   margin-top: 2rem;
+  width: 500px;
 }
 
 nav a.router-link-exact-active {
@@ -51,5 +50,6 @@ nav a {
 nav a:first-of-type {
   border: 0;
 }
+
 
 </style>

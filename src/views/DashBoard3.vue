@@ -1,5 +1,5 @@
 <template>
-  <PageForm :datas="parentsdatas" :boardnum="parentsboardnum"></PageForm>
+  <PageForm :datas="parentsdatas" :boardnum="parentsboardnum" :dashboardtype="dashboardtype"></PageForm>
 </template>
 
 <script lang="js">
@@ -10,19 +10,8 @@ export default {
   data() {
       //parentsboardnum을 숫자로 하고 db 테이블에 게시판 id 만들어서 api 호출할때 데이터로 parentsboardnum을 넘겨준다
         return {
-          // parentsdatas:[
-          //           {
-          //               writer:"writer_게시판1",
-          //               title:'title_게시판1',
-          //               date:'date_게시판1',
-          //           },
-          //           {
-          //               writer:"writer2_게시판1",
-          //               title:'title2_게시판1',
-          //               date:'date2_게시판1',
-          //           },
-          //       ],
           parentsboardnum:"3",
+          dashboardtype:"농구 게시판",
           parentsdatas:{}
         }
     },
