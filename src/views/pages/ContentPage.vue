@@ -49,8 +49,6 @@
           //get(주소): 백엔드 app.get(/contentpage:id)이므로 'contentpage/'를 추가해줌
         this.$axios.get(this.$serverUrl + this.id ).then((res) => {
           this.contentdatas = res.data[0];
-          console.log('data:',res.data);
-          console.log('id',this.contentdatas.page_id);
         }).catch((err) => {
           if (err.message.indexOf('Network Error') >-1) {
             alert('네트워크 오류')
@@ -61,10 +59,8 @@
           this.$router.push({ name: 'ModifyPage', params: {id: this.contentdatas.id},query: {page_id:this.contentdatas.page_id, writer: this.contentdatas.writer, title: this.contentdatas.title, content: this.contentdatas.content} })
         },
       fnDelete() {
-        console.log('백가기전')
         this.$axios.delete(this.$serverUrl + this.id)
           .then((res) => {
-            console.log('delete:',this.id);
             console.log('res:',res);
             this.$router.push({name:('dashboard' + this.contentdatas.page_id)})
           }).catch((err) => {

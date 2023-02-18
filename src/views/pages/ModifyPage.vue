@@ -57,9 +57,7 @@
             page_id:this.page_id,
             id:this.id
           }
-          console.log('백가기전')
           this.$axios.put(apiUrl, this.form).then(() => {
-            console.log('백갔다옴')
             alert('글이 저장되었습니다.')
             this.fnList()
           }).catch((err) => {
