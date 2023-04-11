@@ -26,7 +26,7 @@ import { RouterLink } from 'vue-router'
                     <tr v-for="(l,index) in datas" :key="index">
                         <td>{{ index+1 }}</td>
                         <th>
-                          <!-- 컴포넌트 속 컴포넌트 -->
+                          <!-- 자식 컴포넌트 -->
                           <!-- <RouterLink to="contentroute">{{ datas[index].title }}</RouterLink> -->
                           <!-- <RouterView></RouterView> -->
                           <!-- @click.native"클릭이벤트" -->
